@@ -24,6 +24,7 @@ condition = df.iloc[0:24, 11:12]
 #print(temperature)
 #print(condition)
 # save it back to the time and temperature
+
 df['Time'] = time
 df['Temperature'] = temperature
 df['Dew Point'] = dewPoint
@@ -39,7 +40,18 @@ time1 = df['Time'].dropna(how='any').astype('str')
 temperature1 = df['Temperature'].dropna(how='any').astype('str')
 #condition1 = df['Condition'].dropna(how='any').astype('str')
 #print(condition1)
-print(time1)
+#print(time1)
 print(temperature1)
+print(type(temperature1))
+b = temperature1.str.extract(r'(^.{0,3})')
+print(b)
+print(type(b))
 
-plt.plot(time1,temperature1)
+df['Temperature'] = b
+temp2 = df['Temperature'].dropna(how='any').astype('str')
+print(temp2)
+
+temp3 = temp2.astype('float')
+print(temp3)
+
+plt.plot(time1,temp3)
