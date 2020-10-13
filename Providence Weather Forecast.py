@@ -9,9 +9,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 year = '2014'
-month = 'Aug'
-day = 1
-dataToPlot = 'Pressure'
+month = 'Feb'
+day = 10
+dataToPlot = 'Precip'
 
 start = (day - 1) * 24
 end = start + 24
@@ -41,6 +41,7 @@ df['Wind'] = wind
 df['Wind Speed'] = windSpeed
 df['Wind Gust'] = windGust
 df['Pressure'] = pressure
+df['Precip'] = precip
 df['Condition'] = condition
 
 # change dataframe to series and the object to string
@@ -55,18 +56,20 @@ windSpeed1 = df['Wind Speed'].dropna(how='any').astype('str')
 windGust1 = df['Wind Gust'].dropna(how='any').astype('str')
 pressure1 = df['Pressure'].dropna(how='any').astype('str')
 precip1 = df['Precip'].dropna(how='any').astype('str')
+
 condition1 = df['Condition'].dropna(how='any').astype('str')
 
 #Data Value extraction for number joined with alphabet
 mytime1 = mytime.str.extract(r'(^.{0,5})')
 
-a = temperature1.str.extract(r'(^.{0,3})')
-b = dewPoint1.str.extract(r'(^.{0,3})')
-c = humidity1.str.extract(r'(^.{0,3})')
-d = windSpeed1.str.extract(r'(^.{0,2})')
-e = windGust1.str.extract(r'(^.{0,2})')
-f = pressure1.str.extract(r'(^.{0,6})')
-g = precip1.str.extract(r'(^.{0,3})')
+a = temperature1.str.extract(r'([0-9]+)')
+b = dewPoint1.str.extract(r'([0-9]+)')
+c = humidity1.str.extract(r'([0-9]+)')
+d = windSpeed1.str.extract(r'([0-9]+)')
+e = windGust1.str.extract(r'([0-9]+)')
+f = pressure1.str.extract(r'([\d\.\d]+)')
+g = precip1.str.extract(r'([\d\.\d]+)')
+
 # Wind & Condition are not extracted since the do not contain numbers
 
 #Returning the extracted value back to the dataframe
@@ -92,6 +95,7 @@ pressure2 = df['Pressure'].dropna(how='any').astype('str')
 precip2 = df['Precip'].dropna(how='any').astype('str')
 condition2 = df['Condition'].dropna(how='any').astype('str')
 
+#print(dewPoint2)
 #Changing string values to int and float
 temp3 = temp2.astype('int')
 dewPoint3 = dewPoint2.astype('int')
@@ -100,7 +104,7 @@ wind3 = wind2
 windSpeed3 = windSpeed2.astype('int')
 windGust3 = windGust2.astype('int')
 pressure3 = pressure2.astype('float')
-precip3 = pressure2.astype('float')
+precip3 = precip2.astype('float')
 condition3 = condition2
 
 
